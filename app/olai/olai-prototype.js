@@ -17,39 +17,118 @@ function mulberry32(seed){
 }
 
 /* ============================= SAMPLE DATA ============================= */
+// Ten leaves from the demo dataset (olaiprototype/dataset/*.jpg). Each photo
+// is mapped to the Tamil line with the same number in text.txt.
 const SAMPLES = [
   {
-    id: 'purananuru',
-    title: 'Puṟanāṉūṟu 192',
-    desc: 'Sangam-era ethical verse, Kaṇiyan Pūṅkuṉṟaṉār',
-    seed: 11,
-    damage: 0.55,
-    text: 'யாதும் ஊரே யாவரும் கேளிர்',
-    modern: 'எல்லா ஊர்களும் நமது ஊர்தான். எல்லா மக்களும் நமது உறவினர்கள்தான்.',
-    english: 'Every town is our own town; every person, our own kin.',
-    context: 'One of the most cited lines in Tamil literature — an early articulation of universal kinship, often invoked in modern civic and diplomatic contexts.'
+    id: "leaf1",
+    title: "Birthday greeting leaf",
+    desc: "Dataset photo 1",
+    image: "dataset/1.jpg",
+    damage: 0.57,
+    text: "இனிய பிறந்த நாள் வாழ்த்துக்கள் தல",
+    modern: "இனிய பிறந்த நாள் வாழ்த்துக்கள் தல",
+    english: "Wishing you a happy birthday, boss.",
+    context: "Leaf 1 from the demo dataset. Text: இனிய பிறந்த நாள் வாழ்த்துக்கள் தல — restoration and translation are simulated in this prototype."
   },
   {
-    id: 'thirukkural',
-    title: 'Tirukkuṟaḷ, Kural 1',
-    desc: 'Opening couplet, Book of Virtue',
-    seed: 44,
-    damage: 0.4,
-    text: 'அகர முதல எழுத்தெல்லாம் ஆதி பகவன் முதற்றே உலகு',
-    modern: 'எழுத்துக்கள் எல்லாம் அகரத்தில் தொடங்குவது போல, உலகம் கடவுளிடமிருந்து தொடங்குகிறது.',
-    english: 'As the letter A begins the alphabet, the world begins with the eternal, primal God.',
-    context: 'The very first couplet of the Tirukkuṟaḷ — establishing the text\'s invocation before its 1330 couplets on virtue, wealth, and love.'
+    id: "leaf2",
+    title: "Temple-era observation leaf",
+    desc: "Dataset photo 2",
+    image: "dataset/2.jpg",
+    damage: 0.69,
+    text: "இந்தக் காலத்தில் கோவில்கள்",
+    modern: "இந்தக் காலத்தில் கோவில்கள்",
+    english: "In these times, temples...",
+    context: "Leaf 2 from the demo dataset. Text: இந்தக் காலத்தில் கோவில்கள் — restoration and translation are simulated in this prototype."
   },
   {
-    id: 'family',
-    title: 'Family Jathakam Leaf',
-    desc: 'Household birth-record fragment (composed sample)',
-    seed: 77,
-    damage: 0.7,
-    text: 'இது எங்கள் குடும்பத்தின் பழைய குறிப்பு இதில் பிறப்பு விவரங்கள் உள்ளன',
-    modern: 'இது எங்கள் குடும்பத்தின் பழைய குறிப்பு. இதில் பிறப்பு விவரங்கள் உள்ளன.',
-    english: 'This is our family\'s old record. It contains birth details.',
-    context: 'Representative of the thousands of privately-held horoscope and genealogy leaves (jathakam) still stored in Tamil households, largely undigitized.'
+    id: "leaf3",
+    title: "Folk saying — digestion",
+    desc: "Dataset photo 3",
+    image: "dataset/3.jpg",
+    damage: 0.45,
+    text: "உண்ட உணவு வயிற்றுக்குள் செல்லும் முன் மீண்டும் வேலை",
+    modern: "உண்ட உணவு வயிற்றுக்குள் செல்லும் முன் மீண்டும் வேலை",
+    english: "The food you ate begins working again before it reaches the stomach.",
+    context: "Leaf 3 from the demo dataset. Text: உண்ட உணவு வயிற்றுக்குள் செல்லும் முன் மீண்டும் வேலை — restoration and translation are simulated in this prototype."
+  },
+  {
+    id: "leaf4",
+    title: "Reflection on selfishness",
+    desc: "Dataset photo 4",
+    image: "dataset/4.jpg",
+    damage: 0.57,
+    text: "இந்த சுயநலமும் பொறாமையும் இருக்கும் வரை",
+    modern: "இந்த சுயநலமும் பொறாமையும் இருக்கும் வரை",
+    english: "As long as this selfishness and envy remain...",
+    context: "Leaf 4 from the demo dataset. Text: இந்த சுயநலமும் பொறாமையும் இருக்கும் வரை — restoration and translation are simulated in this prototype."
+  },
+  {
+    id: "leaf5",
+    title: "Erikal lake — first life",
+    desc: "Dataset photo 5",
+    image: "dataset/5.jpg",
+    damage: 0.69,
+    text: "எரிகல் ஏரியின் முதல் உயிர்",
+    modern: "எரிகல் ஏரியின் முதல் உயிர்",
+    english: "The first life of the Erikal lake.",
+    context: "Leaf 5 from the demo dataset. Text: எரிகல் ஏரியின் முதல் உயிர் — restoration and translation are simulated in this prototype."
+  },
+  {
+    id: "leaf6",
+    title: "Thoothukudi rain report",
+    desc: "Dataset photo 6",
+    image: "dataset/6.jpg",
+    damage: 0.45,
+    text: "தூத்துக்குடி மாவட்டத்தில் பரவலாக பலத்த மழை வாகன ஓட்டிகள் சிரமம்",
+    modern: "தூத்துக்குடி மாவட்டத்தில் பரவலாக பலத்த மழை வாகன ஓட்டிகள் சிரமம்",
+    english: "Heavy rain widespread across Thoothukudi district; drivers in difficulty.",
+    context: "Leaf 6 from the demo dataset. Text: தூத்துக்குடி மாவட்டத்தில் பரவலாக பலத்த மழை வாகன ஓட்டிகள் சிரமம் — restoration and translation are simulated in this prototype."
+  },
+  {
+    id: "leaf7",
+    title: "Proverb leaf — justice",
+    desc: "Dataset photo 7",
+    image: "dataset/7.jpg",
+    damage: 0.57,
+    text: "நியாயம் செய்து விடும்",
+    modern: "நியாயம் செய்து விடும்",
+    english: "Justice will prevail.",
+    context: "Leaf 7 from the demo dataset. Text: நியாயம் செய்து விடும் — restoration and translation are simulated in this prototype."
+  },
+  {
+    id: "leaf8",
+    title: "Forest journey tale",
+    desc: "Dataset photo 8",
+    image: "dataset/8.jpg",
+    damage: 0.69,
+    text: "அவனும் சம்மதித்து காட்டுக்கு அழைத்து சென்றபோது திடீர் என மனைவி காட்டு வழியில்",
+    modern: "அவனும் சம்மதித்து காட்டுக்கு அழைத்து சென்றபோது திடீர் என மனைவி காட்டு வழியில்",
+    english: "When he agreed and took them to the forest, suddenly the wife, on the forest path...",
+    context: "Leaf 8 from the demo dataset. Text: அவனும் சம்மதித்து காட்டுக்கு அழைத்து சென்றபோது திடீர் என மனைவி காட்டு வழியில் — restoration and translation are simulated in this prototype."
+  },
+  {
+    id: "leaf9",
+    title: "Truth and three keepers",
+    desc: "Dataset photo 9",
+    image: "dataset/9.jpg",
+    damage: 0.45,
+    text: "நீ உண்மை பேசியதால் மூன்றுபேரையும் வைத்திரு என்பீர்கள்",
+    modern: "நீ உண்மை பேசியதால் மூன்றுபேரையும் வைத்திரு என்பீர்கள்",
+    english: "Because you spoke the truth, you will be told to keep all three.",
+    context: "Leaf 9 from the demo dataset. Text: நீ உண்மை பேசியதால் மூன்றுபேரையும் வைத்திரு என்பீர்கள் — restoration and translation are simulated in this prototype."
+  },
+  {
+    id: "leaf10",
+    title: "Request letter fragment",
+    desc: "Dataset photo 10",
+    image: "dataset/10.jpg",
+    damage: 0.57,
+    text: "உங்கள் வேண்டுகோள்",
+    modern: "உங்கள் வேண்டுகோள்",
+    english: "Your request.",
+    context: "Leaf 10 from the demo dataset. Text: உங்கள் வேண்டுகோள் — restoration and translation are simulated in this prototype."
   }
 ];
 
@@ -63,10 +142,7 @@ let state = {
   damageReport: null,
   restorationWords: null,
   restorationDone: false,
-  archive: [
-    { title: 'Puṟanāṉūṟu 192', text: 'யாதும் ஊரே யாவரும் கேளிர்', translation: 'Every town is our own town; every person, our own kin.' },
-    { title: 'Tirukkuṟaḷ, Kural 1', text: 'அகர முதல எழுத்தெல்லாம் ஆதி பகவன் முதற்றே உலகு', translation: 'As the letter A begins the alphabet, the world begins with the eternal, primal God.' }
-  ]
+  archive: SAMPLES.slice(0, 3).map(s=>({ title: s.title, text: s.text, translation: s.english }))
 };
 
 /* ============================= LEAF RENDERER ============================= */
@@ -240,8 +316,22 @@ function sharpen(imgData,w,h){
 function renderThumbs(){
   SAMPLES.forEach((s, i) => {
     const c = root.querySelector("#thumb-" + i);
-    if(c) drawLeaf(c, s.seed, s.damage, {});
+    if(c) drawThumb(c, s.image);
   });
+}
+
+/* load a dataset photo into a thumbnail canvas (object-fit cover) */
+function drawThumb(canvas, src){
+  const ctx = canvas.getContext('2d');
+  const img = new Image();
+  img.onload = ()=>{
+    const w = canvas.width, h = canvas.height;
+    const scale = Math.max(w / img.width, h / img.height);
+    const dw = img.width * scale, dh = img.height * scale;
+    ctx.clearRect(0,0,w,h);
+    ctx.drawImage(img, (w-dw)/2, (h-dh)/2, dw, dh);
+  };
+  img.src = src;
 }
 
 /* ============================= STEP RENDERERS ============================= */
@@ -286,7 +376,7 @@ function renderStep1(){
         <canvas id="thumb-${i}" width="220" height="130"></canvas>
         <div class="meta">
           <div class="title">${s.title}</div>
-          <div class="desc">${s.desc}</div>
+          <div class="desc">${s.desc} · ${s.text.slice(0,26)}${s.text.length>26?'…':''}</div>
           ${damageBadge(s.damage)}
         </div>
       </div>`).join('') +
@@ -376,19 +466,37 @@ function renderStep2(){
 function paintCanvas(){
   const canvas = root.querySelector("#leafCanvas");
   if(!canvas) return;
-  if(state.customImage){
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.drawImage(state.customImage, 0,0,canvas.width,canvas.height);
-    let imgData = ctx.getImageData(0,0,canvas.width,canvas.height);
-    if(state.filters.denoise) imgData = boxBlur(imgData, canvas.width, canvas.height, 1);
-    if(state.filters.contrast) imgData = adjustContrast(imgData, 35);
-    if(state.filters.sharpen) imgData = sharpen(imgData, canvas.width, canvas.height);
-    ctx.putImageData(imgData,0,0);
-  } else {
-    const s = SAMPLES[state.sampleIndex];
-    drawLeaf(canvas, s.seed, s.damage, state.filters);
-  }
+  const ctx = canvas.getContext('2d');
+  let srcImg = state.customImage || loadSampleImage();
+  if(!srcImg) return;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  drawCover(srcImg, canvas);
+  let imgData = ctx.getImageData(0,0,canvas.width,canvas.height);
+  if(state.filters.denoise) imgData = boxBlur(imgData, canvas.width, canvas.height, 1);
+  if(state.filters.contrast) imgData = adjustContrast(imgData, 35);
+  if(state.filters.sharpen) imgData = sharpen(imgData, canvas.width, canvas.height);
+  ctx.putImageData(imgData,0,0);
+}
+
+/* object-fit: cover draw of an image into a canvas */
+function drawCover(img, canvas){
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  const scale = Math.max(w / img.width, h / img.height);
+  const dw = img.width * scale, dh = img.height * scale;
+  ctx.drawImage(img, (w-dw)/2, (h-dh)/2, dw, dh);
+}
+
+/* shared cached Image per sample so re-renders don't reload the photo */
+const imageCache = {};
+function loadSampleImage(){
+  const s = SAMPLES[state.sampleIndex];
+  if(!s || !s.image) return null;
+  if(imageCache[s.id]) return imageCache[s.id];
+  const img = new Image();
+  img.src = s.image;
+  imageCache[s.id] = img;
+  return img;
 }
 
 /* --- STEP 3: damage diagnosis --- */
@@ -443,11 +551,11 @@ function renderStep3(){
 
   const canvas = root.querySelector("#diagCanvas");
   if(state.customImage){
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(state.customImage,0,0,canvas.width,canvas.height);
+    drawCover(state.customImage, canvas);
   } else {
-    const s = SAMPLES[state.sampleIndex];
-    drawLeaf(canvas, s.seed, s.damage, {});
+    const img = loadSampleImage();
+    if(img) drawCover(img, canvas);
+    else drawLeaf(canvas, 11, 0.5, {}); // fallback: synthetic leaf
   }
 
   const report = analyzeDamage();
@@ -473,7 +581,7 @@ function renderStep3(){
 
 /* --- STEP 4: AI restoration --- */
 function buildRestoration(){
-  const rnd = mulberry32( state.customImage ? 999 : SAMPLES[state.sampleIndex].seed + 5 );
+  const rnd = mulberry32( state.customImage ? 999 : 100 + state.sampleIndex * 7 );
   const sample = state.customImage ? SAMPLES[2] : SAMPLES[state.sampleIndex]; // fallback text for custom uploads
   const words = sample.text.split(' ').map(w=>({
     word: w,
@@ -676,10 +784,7 @@ root.querySelectorAll('.step').forEach(el=>{
 
 root.querySelector("#resetBtn").addEventListener('click', ()=>{
   state = { step:1, sampleIndex:0, customImage:null, filters:{contrast:false,denoise:false,sharpen:false}, heatmapOn:false, damageReport:null, restorationWords:null, restorationDone:false,
-    archive: [
-      { title: 'Puṟanāṉūṟu 192', text: 'யாதும் ஊரே யாவரும் கேளிர்', translation: 'Every town is our own town; every person, our own kin.' },
-      { title: 'Tirukkuṟaḷ, Kural 1', text: 'அகர முதல எழுத்தெல்லாம் ஆதி பகவன் முதற்றே உலகு', translation: 'As the letter A begins the alphabet, the world begins with the eternal, primal God.' }
-    ]};
+    archive: SAMPLES.slice(0, 3).map(s=>({ title: s.title, text: s.text, translation: s.english })) };
   render();
 });
 
