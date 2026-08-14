@@ -666,6 +666,7 @@ function runRestoreAnimation(){
         state.archive.unshift({ title: sample.title, text: fullText, translation: sample.english });
       }
       render();
+      paintRestoredText(state.restorationDone);
       return;
     }
     const idx = maskedIdx[i];
