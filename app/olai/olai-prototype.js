@@ -374,11 +374,6 @@ function renderStep1(){
     SAMPLES.map((s,i)=>`
       <div class="sample-card ${i===state.sampleIndex && !state.customImage ? 'selected':''}" data-idx="${i}" tabindex="0">
         <canvas id="thumb-${i}" width="220" height="130"></canvas>
-        <div class="meta">
-          <div class="title">${s.title}</div>
-          <div class="desc">${s.desc} · ${s.text.slice(0,26)}${s.text.length>26?'…':''}</div>
-          ${damageBadge(s.damage)}
-        </div>
       </div>`).join('') +
     `</div>
     <div class="upload-zone" id="uploadZone">
